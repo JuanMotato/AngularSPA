@@ -1,0 +1,152 @@
+<div class="container app">
+        <div class="row"> 
+                <div class="col-sm-8">
+                  <h1 class="text-center">
+                    {{title}}
+                  </h1>
+                </div>
+                <div class="col-sm-4">
+                  <div class="alert alert-success alert-dismissable" *ngIf="msg">
+                    <a href="#" class="close" (click)="closeAlert()">
+                      &times;
+                    </a>
+                    {{msg}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <img width="350" height="300" src="../assets/imagenes/empleados.png" />
+                </div>
+                <div class="col-sm-8">
+                  <h2>Registro:</h2>
+                  <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="name" class="control-label col-sm-2">
+                        Nombre
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name"
+                          name="name" [(ngModel)]="model.name"
+                          placeholder="Ingrese el nombre"
+                        >
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="position" class="control-label col-sm-2">
+                        Cargo
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name"
+                          name="position" [(ngModel)]="model.position"
+                          placeholder="Ingrese el cargo"
+                        >
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="email" class="control-label col-sm-2">
+                        Correo
+                      </label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" id="email"
+                          name="email" 
+                          [(ngModel)]="model.email"
+                          placeholder="Ingrese el email"
+                        >
+                      </div>
+                    </div>
+            
+                    <div class="form-group">
+                      <div class="col-sm-10 col-sm-offset-2">
+                        
+                        <button type="submit" class="btn btn-success" (click)="addEmployee()">
+                          Registrar
+                        </button>
+                        
+          
+                        </div>
+                      
+                      
+                      
+                    </div>
+                  </form>
+                </div>
+              </div>
+<div class="row">
+        <div class="col-sm-8" *ngIf="employees.length > 0 else noemployees">
+          <h2>Lista de registros: </h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let employee of employees; let i = index">
+                <td>{{employee.name}}</td>
+                <td>{{employee.position}}</td>
+                <td>{{employee.email}}</td>
+                <td>
+                  <a (click)="editEmployee(i);bubble=false" class="btn btn-success">
+                    Editar
+                  </a>
+                  <a (click)="deleteEmployee(i)" class="btn btn-danger">
+                    Eliminar
+                  </a>
+                </td>
+              </tr>
+    
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-4" [hidden]="hideUpdate" *ngIf="!bubble">
+          <h2>Actualizar Informacion:</h2>
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="name" class="control-label col-sm-2">
+                Nombre
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name"
+                  name="name" [(ngModel)]="model2.name"
+                  placeholder="Enter a New Name"
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="position" class="control-label col-sm-2">
+                Cargo
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name"
+                  name="position" [(ngModel)]="model2.position"
+                  placeholder="Enter a New Position"
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="control-label col-sm-2">
+                Correo
+              </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="email"
+                  name="email" [(ngModel)]="model2.email"
+                  placeholder="Enter a New Email"
+                >
+              </div>
+            </div>
+    
+            <div class="form-group">
+              <div class="col-sm-10 col-sm-offset-2">
+                <button type="submit" class="btn btn-success" (click)="updateEmployee();bubble=true">
+                  Actualizar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
